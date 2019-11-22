@@ -83,7 +83,7 @@ func main() {
 
 	printCDF := func(n int, cdf []int) {
 		for i, num := range cdf {
-			fmt.Printf("%f,%f\n", z_vals[i], float64(num)/110.0)
+			fmt.Printf("%f,%f,%f\n", z_vals[i], float64(num)/110.0, theta_vals[i])
 		}
 	}
 
@@ -91,7 +91,7 @@ func main() {
 
 		cdf := make([]int, len(z_vals))
 
-		fmt.Printf("n = %d\n", n)
+		fmt.Printf("#### n = %d\n", n)
 		for i := 0; i < 110; i++ {
 			m := getSampleMean(n, g)
 			z := (m - mu) / (std / math.Sqrt(float64(n)))
@@ -109,12 +109,15 @@ func main() {
 		}
 
 		maxDiff := 0.0
+		fmt.Println("Absolute Differences")
 		for i, num := range cdf {
 			p := float64(num) / 110.0
 			diff := math.Abs(p - theta_vals[i])
+			fmt.Printf("%d,%f\n", i+1, diff)
 			maxDiff = math.Max(maxDiff, diff)
 		}
 
+		fmt.Println("CDF")
 		printCDF(n, cdf)
 		fmt.Printf("MAD: %f\n", maxDiff)
 
