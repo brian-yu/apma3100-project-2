@@ -82,6 +82,7 @@ func main() {
 	std := math.Sqrt(variance)
 
 	printCDF := func(n int, cdf []int) {
+		fmt.Println("z,F,theta")
 		for i, num := range cdf {
 			fmt.Printf("%f,%f,%f\n", z_vals[i], float64(num)/110.0, theta_vals[i])
 		}
